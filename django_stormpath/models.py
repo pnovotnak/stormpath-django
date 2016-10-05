@@ -269,7 +269,7 @@ class StormpathBaseUser(AbstractBaseUser, PermissionsMixin):
             if field != 'password':
                 self.__setattr__(field, account[field])
         for key in account.custom_data.keys():
-            self.__setattr__(key.split(self.DJANGO_PREFIX)[0], account.custom_data[key])
+            self.__setattr__(key.split(self.DJANGO_PREFIX, 1)[-1], account.custom_data[key])
 
         if account.status == account.STATUS_ENABLED:
             self.is_active = True
